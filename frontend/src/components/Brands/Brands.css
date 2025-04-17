@@ -1,0 +1,19 @@
+/* !brand start */
+.brands {
+    margin-top: 40px 0;
+  }
+  .brand-list {
+    display: flex;
+    flex-wrap: wrap; /* sıkışınca taşmayı önle */
+    justify-content: space-between;
+    border: 1px solid #dee0ea;
+    padding: 30px 10px;
+  }
+  .brand-list .brand-item {
+    opacity: 0.6;
+    transition: 0.2s ease all;
+  }
+  .brand-list .brand-item:hover {
+    opacity: 1;
+  }
+  /* !brand end */
