@@ -1,6 +1,6 @@
 import "./Products.css";
 import ProductItem from "./ProductItem";
-import ProductsData from "../../data.json";
+import productsData from "../../data.json";
 import "./Products.css";
 import { useState } from "react";
 import React from "react";
@@ -14,7 +14,7 @@ function NextBtn({ onClick }) {
     </button>
   );
 }
-NextBtn.prototype = {
+NextBtn.propTypes = {
   onClick: PropTypes.func,
 };
 
@@ -25,12 +25,13 @@ function PrevBtn({ onClick }) {
     </button>
   );
 }
-PrevBtn.prototype = {
+PrevBtn.propTypes = {
   onClick: PropTypes.func,
 };
 
 const Products = () => {
-  const [products] = useState(ProductsData);
+  const [products] = useState(productsData);
+  
   const sliderSettings = {
     dots: false,
     infinite: true,
@@ -68,7 +69,7 @@ const Products = () => {
           
             <Slider {...sliderSettings}>
               {products.map((product) => (
-                <ProductItem product={product} key={product.id} />
+                <ProductItem productItem={product} key={product.id} />
               ))}
             </Slider>
           

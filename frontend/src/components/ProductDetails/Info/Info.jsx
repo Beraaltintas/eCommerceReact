@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "./Info.css";
 const Info = () => {
+  const [activeColor,setActiveColor] = useState("");
+  const [activeValue, setActiveValue] = useState("");
   return (
     <div className="product-info">
                 <h1 className="product-title">Ridley High Waist</h1>
@@ -31,17 +33,21 @@ const Info = () => {
                           <span>Color</span>
                         </div>
                         <div className="colors-wrapper">
-                          <div className="color-wrapper">
+
+                          <div className={`color-wrapper ${activeColor ==='blue' ? 'active':''}`}
+                          onClick={()=>{setActiveColor("blue")}}>
                             <label className="blue-color">
                               <input type="radio" name="product-color" />
                             </label>
                           </div>
-                          <div className="color-wrapper">
+                          <div className={`color-wrapper ${activeColor ==='red' ? 'active':''}`}
+                          onClick={()=>{setActiveColor("red")}}>
                             <label className="red-color">
                               <input type="radio" name="product-color" />
                             </label>
                           </div>
-                          <div className="color-wrapper active">
+                          <div className={`color-wrapper ${activeColor ==='green' ? 'active':''}`}
+                          onClick={()=>{setActiveColor("green")}}>
                             <label className="green-color">
                               <input type="radio" name="product-color" />
                             </label>
@@ -53,11 +59,19 @@ const Info = () => {
                           <span>Size</span>
                         </div>
                         <div className="values-list">
-                          <span>XS</span>
-                          <span>S</span>
-                          <span className="active">M</span>
-                          <span>L</span>
-                          <span>XL</span>
+                          <span className={`xs ${activeValue === "xs" ?'active':""}`}
+                          onClick={()=>setActiveValue("xs")}
+                          >XS</span>
+                          <span className={`s ${activeValue === "s" ?'active':""}`}
+                          onClick={()=>setActiveValue("s")}
+                          >S</span>
+                          <span className={`m ${activeValue === "m" ?'active':""}`}
+                          onClick={()=>setActiveValue("m")}
+                          >M</span>
+                          <span className={`l ${activeValue === "l" ?'active':""}`}
+                          onClick={()=>setActiveValue("l")}>L</span>
+                          <span className={`xl ${activeValue === "xl" ?'active':""}`}
+                          onClick={()=>setActiveValue("xl")}>XL</span>
                         </div>
                       </div>
                       <div className="cart-button">

@@ -20,8 +20,8 @@
 
 }
 .single-product .gallery-thumbs{
-    display: flex;
-    column-gap: 10px;
+    /* display: flex;
+    column-gap: 10px; */
 }
 .single-product .gallery-thumbs li{
     cursor: pointer;
@@ -45,7 +45,7 @@
     top: 50%;
     transform: translate(-50%);
     background-color: transparent;
-    font-size: 30px;
+    font-size: 20px;
 
 }
 .single-product .glide__arrow--left{
@@ -58,9 +58,9 @@
     right: 0;
 
 }
-.gallery-thumbs{
+/* .gallery-thumbs{
     display: flex;
 }
-.gallery-thumbs img{
-    width: 100px;
-}
+.single-product .gallery-thumbs img {
+    width: 100%;
+} */
