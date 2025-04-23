@@ -13,17 +13,25 @@ const CartProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
-  console.log(cartItems.length);
+  //console.log(cartItems.length);
 
   const addToCart = (cartItem) => {
     // setCartItems([...cartItems, product]); 1. yol
     setCartItems((prevCart) => [...prevCart, cartItem]);
   };
+  const removeFromCart = (itemId)=>{
+    const filteredCartItems = cartItems.filter((cartItem)=>{
+      return cartItem.id !== itemId;
+    })
+    setCartItems(filteredCartItems);
+
+  }
   return (
     <CartContext.Provider
       value={{
         cartItems,
         addToCart,
+        removeFromCart
       }}
     >
       {children}

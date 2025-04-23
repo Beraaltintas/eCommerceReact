@@ -13,11 +13,11 @@ import ProductDetailsPage from "../Pages/ProductDetailsPage";
 function App() {
   return (
     <React.Fragment>
-      <HomePage />
+      {/* <HomePage /> */}
       {/* <ShopPage/> */}
       {/* <ContactPage/> */}
       {/* <AuthPage/> */}
-      {/* <CartPage/> */}
+      <CartPage/>
       {/* <BlogPage/> */}
       {/* <BlogDetailsPage/> */}
       {/* <ProductDetailsPage/> */}
