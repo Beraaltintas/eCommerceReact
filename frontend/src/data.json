@@ -84,22 +84,5 @@
                 "img/products/product5/3.png"
             ]
         }
-    },
-    {
-        "id": 5,
-        "name": "La Bohème Rose Gold",
-        "price": {
-            "oldPrice": 165.00,
-            "newPrice": 162.99
-        },
-        "discount": 40,
-        "img": {
-            "singleImage": "img/products/product5/1.png",
-            "thumbs": [
-                "img/products/product5/1.png",
-                "img/products/product5/2.png",
-                "img/products/product5/3.png"
-            ]
-        }
     }
 ]
