@@ -17,21 +17,23 @@ const CartProvider = ({ children }) => {
 
   const addToCart = (cartItem) => {
     // setCartItems([...cartItems, product]); 1. yol
-    setCartItems((prevCart) => [...prevCart, cartItem]);
+    setCartItems((prevCart) => [
+      ...prevCart,
+      { ...cartItem, quantity: cartItem.quantity ? cartItem.quantity : 1, },
+    ]);
   };
-  const removeFromCart = (itemId)=>{
-    const filteredCartItems = cartItems.filter((cartItem)=>{
+  const removeFromCart = (itemId) => {
+    const filteredCartItems = cartItems.filter((cartItem) => {
       return cartItem.id !== itemId;
-    })
+    });
     setCartItems(filteredCartItems);
-
-  }
+  };
   return (
     <CartContext.Provider
       value={{
         cartItems,
         addToCart,
-        removeFromCart
+        removeFromCart,
       }}
     >
       {children}

@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { CartContext } from "../../context/CartProvider";
 
 const CartTotals = () => {
+  const [fastCargoChecked, setFastCargoChecked] = useState(false)
+  const {cartItems} = useContext(CartContext);
+  const cartItemTotals = cartItems.map((item)=>{
+    const itemTotal = item.price.newPrice * item.quantity;
+    return itemTotal
+  });
+  const subTotals = cartItemTotals.reduce((previousValue, currentValue)=>{
+    return previousValue + currentValue;
+  }, 0)
+  const cargoFee = 15 ;
+  const CartTotals = fastCargoChecked ? (subTotals + cargoFee).toFixed(2): subTotals.toFixed(2);
+  
   return (
     <div className="cart-totals">
       <h2>Cart totals</h2>
@@ -9,7 +22,7 @@ const CartTotals = () => {
           <tr className="cart-subtotal">
             <th>Subtotal</th>
             <td>
-              <span id="subtotal">$208.00</span>
+              <span id="subtotal">${subTotals.toFixed(2)}</span>
             </td>
           </tr>
           <tr>
@@ -17,8 +30,9 @@ const CartTotals = () => {
             <td>
               <ul>
                 <li>
-                  <label htmlFor="">Fast Cargo: $15.00</label>
-                  <input type="checkbox" id="fast-cargo" />
+                  <label htmlFor="">Fast Cargo: ${cargoFee}</label>
+                  <input type="checkbox" id="fast-cargo" 
+                  checked={fastCargoChecked} onChange={()=>setFastCargoChecked(!fastCargoChecked)}/>
                 </li>
                 <li>
                   <a href="#">Change Address</a>
@@ -29,7 +43,7 @@ const CartTotals = () => {
           <tr>
             <th>Total</th>
             <td>
-              <strong id="cart-total">$223.00 </strong>
+              <strong id="cart-total">${CartTotals} </strong>
             </td>
           </tr>
         </tbody>
