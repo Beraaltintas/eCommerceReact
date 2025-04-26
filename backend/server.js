@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const mainRoute = require("./routes/index.js");
 const port = 5000;
+const app = express();
 dotenv.config();
 const connect = async () => {
   try {
@@ -12,7 +13,10 @@ const connect = async () => {
     throw error;
   }
 };
-const app = express();
+//middlewares
+app.use(express.json());
+
+
 
 app.use("/api", mainRoute);
 
