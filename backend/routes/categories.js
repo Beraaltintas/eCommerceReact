@@ -29,16 +29,38 @@ router.get("/", async (req, res) => {
 router.get("/:categoryId", async (req, res) => {
   try {
     const categoryId = req.params.categoryId;
-    
+
     try {
-        const category = await Category.findById(categoryId);
-        res.status(200).json(category);
+      const category = await Category.findById(categoryId);
+      res.status(200).json(category);
     } catch (error) {
-        console.log(error);
-        
-        res.status(404).json({error: "Category not found"});
+      console.log(error);
+
+      res.status(404).json({ error: "Category not found" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "server error" });
+  }
+});
+//category update
+router.put("/:categoryId", async (req, res) => {
+  try {
+    const categoryId = req.params.categoryId;
+    const updates = req.body;
+    const existingCategory = await Category.findById(categoryId);
+    console.log(existingCategory);
+    
+    if(!existingCategory){
+        return res.status(404).json({error: "category not found"});
     }
 
+    const updatedCategory = await Category.findByIdAndUpdate(
+      categoryId,
+      updates,
+      { new: true }
+    );
+    res.status(200).json(updatedCategory);
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "server error" });
