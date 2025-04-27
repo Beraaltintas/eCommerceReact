@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Category = require("../models/Category.js")
 
+//yeni kategori oluşturma (create)
 router.post("/", async(req, res)=>{
     try {
         const {name, img} = req.body;
@@ -17,6 +18,13 @@ router.post("/", async(req, res)=>{
 
 // tüm ürünleri getirme
 router.get("/", async(req, res)=> {
-    res.send("kategoriler geldi");
+    try {
+        const categories = await Category.find();
+        res.status(200).json(categories);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({error: "server error"});
+        
+    }
 })
 module.exports = router;
