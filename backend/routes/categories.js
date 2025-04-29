@@ -11,10 +11,11 @@ router.post("/", async (req, res) => {
     res.status(201).json(newCategory);
   } catch (error) {
     console.log(error);
+    res.status(500).json({ error: "server error" });
   }
 });
 
-// tüm ürünleri getirme
+// tüm kategorileri getirme
 router.get("/", async (req, res) => {
   try {
     const categories = await Category.find();
