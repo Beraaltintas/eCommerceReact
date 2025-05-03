@@ -1,13 +1,13 @@
 import { useContext } from "react";
 import "./Header.css";
-import PropTypes from  "prop-types";
+import PropTypes from "prop-types";
 import { CartContext } from "../../../context/CartProvider";
-import {Link, useLocation} from "react-router-dom";
-const Header = ({setIsSearchShow}) => {
-  const {cartItems}= useContext(CartContext);
-  const {pathname} = useLocation() //{pathname} özelliğini alır sadece
-  
-  
+import { Link, useLocation } from "react-router-dom";
+const Header = ({ setIsSearchShow }) => {
+  const { cartItems } = useContext(CartContext);
+  const { pathname } = useLocation(); //{pathname} özelliğini alır sadece
+  const user = localStorage.getItem("user");
+
   return (
     <header>
       <div className="global-notification">
@@ -36,7 +36,12 @@ const Header = ({setIsSearchShow}) => {
               <nav className="navigation">
                 <ul className="menu-list">
                   <li className="menu-list-item">
-                    <Link to={"/"} className={`menu-link ${pathname === '/' ? "active" : ""}`}>
+                    <Link
+                      to={"/"}
+                      className={`menu-link ${
+                        pathname === "/" ? "active" : ""
+                      }`}
+                    >
                       Home
                       <i className="bi bi-chevron-down"></i>
                     </Link>
@@ -74,7 +79,12 @@ const Header = ({setIsSearchShow}) => {
                   </li>
 
                   <li className="menu-list-item megamenu-wrapper">
-                    <Link to={"/shop"} className={`menu-link ${pathname === '/shop' ? "active" : ""}`}>
+                    <Link
+                      to={"/shop"}
+                      className={`menu-link ${
+                        pathname === "/shop" ? "active" : ""
+                      }`}
+                    >
                       Shop
                       <i className="bi bi-chevron-down"></i>
                     </Link>
@@ -183,13 +193,23 @@ const Header = ({setIsSearchShow}) => {
                   </li>
 
                   <li className="menu-list-item">
-                    <Link to={"/blog"} className={`menu-link ${pathname === '/blog' && "active"}`}>
+                    <Link
+                      to={"/blog"}
+                      className={`menu-link ${
+                        pathname === "/blog" && "active"
+                      }`}
+                    >
                       Blog
                     </Link>
                   </li>
 
                   <li className="menu-list-item">
-                    <Link to={"/contact"} className={`menu-link ${pathname === '/contact' ? "active" : ""}`}>
+                    <Link
+                      to={"/contact"}
+                      className={`menu-link ${
+                        pathname === "/contact" ? "active" : ""
+                      }`}
+                    >
                       Contact
                     </Link>
                   </li>
@@ -211,16 +231,31 @@ const Header = ({setIsSearchShow}) => {
                   <i className="bi bi-search"></i>
                 </button>
 
-                <a href="#">
+                {/* <a href="#">
                   <i className="bi bi-heart"></i>
-                </a>
+                </a> */}
 
                 <div className="header-cart">
                   <Link to={"/cart"} className="header-cart-link">
                     <i className="bi bi-bag"></i>
-                    <span className="header-cart-count">{cartItems.length}</span>
+                    <span className="header-cart-count">
+                      {cartItems.length}
+                    </span>
                   </Link>
                 </div>
+                {user && (
+                  <button
+                    className="search-button"
+                    onClick={() => {
+                      if (window.confirm("Emin misin?")) {
+                        localStorage.removeItem("user");
+                        window.location.href = "/";
+                      }
+                    }}
+                  >
+                    <i className="bi bi-box-arrow-right"></i>
+                  </button>
+                )}
               </div>
             </div>
           </div>
@@ -231,5 +266,5 @@ const Header = ({setIsSearchShow}) => {
 };
 export default Header;
 Header.propTypes = {
-  setIsSearchShow: PropTypes.func
+  setIsSearchShow: PropTypes.func,
 };
