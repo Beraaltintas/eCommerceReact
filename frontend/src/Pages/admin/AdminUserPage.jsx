@@ -1,43 +1,113 @@
-import { Table } from 'antd';
-import React from 'react'
+import { Button, message, Popconfirm, Table } from "antd";
+import React, { useCallback, useEffect, useState } from "react";
 
 const AdminUserPage = () => {
-  const dataSource = [
-    {
-      key: '1',
-      name: 'Mike',
-      age: 32,
-      address: '10 Downing Street',
-    },
-    {
-      key: '2',
-      name: 'John',
-      age: 42,
-      address: '10 Downing Street',
-    },
-  ];
-  
+  const [dataSource, setDataSource] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
+      title: "Avatar",
+      dataIndex: "avatar",
+      key: "avatar",
+      render: (imgSrc) => (
+        <img
+          src={imgSrc}
+          alt="Avatar"
+          style={{
+            width: "50px",
+            height: "50px",
+            borderRadius: "50%",
+          }}
+        />
+      ),
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
+      title: "Username",
+      dataIndex: "username",
+      key: "username",
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+    },
+
+    {
+      title: "Role",
+      dataIndex: "role",
+      key: "role",
+    },
+
+    {
+      title: "Actions",
+      dataIndex: "actions",
+      key: "actions",
+      render: (_, record) => (
+        <Popconfirm
+          title="Delete the user"
+          description="Are you sure to delete this user?"
+          okText="Yes"
+          cancelText="No"
+          onConfirm={() => deleteUser(record.email)}
+        >
+          <Button type="primary" danger>
+            Delete
+          </Button>
+        </Popconfirm>
+      ),
     },
   ];
+  const fetchUsers = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${apiUrl}/api/users`);
+      if (response.ok) {
+        const data = await response.json();
+        setDataSource(data);
+      } else {
+        message.error("Data fetch Failed");
+      }
+      console.log(response);
+    } catch (error) {
+      console.log("Data error:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [apiUrl]);
+
+  const deleteUser = async (userEmail) => {
+    try {
+      const response = await fetch(`${apiUrl}/api/users/${userEmail}`,{
+        method: "DELETE",
+      });
+      if (response.ok) {
+        message.success("Deletion Successed")
+        fetchUsers();
+      } else {
+        message.error("deletion failed");
+      }
+      console.log(response);
+    } catch (error) {
+      console.log("delete errorı:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
 
   return (
-    <Table dataSource={dataSource} columns={columns} />
-  )
-}
+    <Table
+      dataSource={dataSource}
+      columns={columns}
+      rowKey={(record) => record._id}
+      loading={loading}
+    />
+  );
+};
 
-export default AdminUserPage
+export default AdminUserPage;
