@@ -1,15 +1,16 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import HomePage from "../Pages/HomePage";
-import ShopPage from "../Pages/ShopPage";
-import ContactPage from "../Pages/ContactPage";
-import CartPage from "../Pages/CartPage";
-import AuthPage from "../Pages/AuthPage";
+import HomePage from "./Pages/HomePage";
+import ShopPage from "./Pages/ShopPage";
+import ContactPage from "./Pages/ContactPage";
+import CartPage from "./Pages/CartPage";
+import AuthPage from "./Pages/AuthPage";
 import "./App.css";
 import Auth from "./components/Auth/Auth";
-import BlogPage from "../Pages/BlogPage";
-import BlogDetailsPage from "../Pages/BlogDetailsPage";
-import ProductDetailsPage from "../Pages/ProductDetailsPage";
+import BlogPage from "./Pages/BlogPage";
+import BlogDetailsPage from "./Pages/BlogDetailsPage";
+import ProductDetailsPage from "./Pages/ProductDetailsPage";
+import AdminUserPage from "./Pages/admin/AdminUserPage";
 
 function App() {
   return (
@@ -22,6 +23,11 @@ function App() {
       <Route path="/auth" element={<AuthPage/>}/>
       <Route path="/product/:id" element={<ProductDetailsPage/>}/>
       <Route path="/blog/:id" element={<BlogDetailsPage/>}/>
+      <Route path = "/admin/*">
+      <Route path="users" element={<AdminUserPage/>}/>
+      
+      </Route>
+      
     </Routes>
   );
 }

@@ -164,7 +164,7 @@ const AdminLayout = ({ children }) => {
                   minHeight: 360,
                 }}
               >
-                asasdede{children}
+                {children}
               </div>
             </Content>
           </Layout>
