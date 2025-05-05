@@ -10,7 +10,9 @@ import Auth from "./components/Auth/Auth";
 import BlogPage from "./Pages/BlogPage";
 import BlogDetailsPage from "./Pages/BlogDetailsPage";
 import ProductDetailsPage from "./Pages/ProductDetailsPage";
-import AdminUserPage from "./Pages/admin/AdminUserPage";
+import AdminUserPage from "./Pages/Admin/UserPage";
+import AdminUserSinglePage from "./Pages/Admin/UserSinglePage";
+
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
       <Route path="/blog/:id" element={<BlogDetailsPage/>}/>
       <Route path = "/admin/*">
       <Route path="users" element={<AdminUserPage/>}/>
+      <Route path="users/:_id" element={<AdminUserSinglePage/>}/>
       
       </Route>
       

@@ -74,7 +74,7 @@ const ProductItem = ({ productItem }) => {
 
 export default ProductItem;
 
-ProductItem.PropTypes = {
+ProductItem.propTypes = {
   productItem: PropTypes.object,
   setCartItems : PropTypes.func,
 };

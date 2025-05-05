@@ -1,10 +1,13 @@
-import { Button, message, Popconfirm, Table } from "antd";
+import { Button, message, Popconfirm, Table, Space } from "antd";
 import React, { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const AdminUserPage = () => {
+
+const UserPage = () => {
   const [dataSource, setDataSource] = useState([]);
   const [loading, setLoading] = useState(false);
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
+  const navigate = useNavigate();
 
   const columns = [
     {
@@ -45,20 +48,34 @@ const AdminUserPage = () => {
       dataIndex: "actions",
       key: "actions",
       render: (_, record) => (
-        <Popconfirm
-          title="Delete the user"
-          description="Are you sure to delete this user?"
-          okText="Yes"
-          cancelText="No"
-          onConfirm={() => deleteUser(record.email)}
-        >
-          <Button type="primary" danger>
-            Delete
-          </Button>
-        </Popconfirm>
+        <Space>
+          <Popconfirm
+            title="Delete the user"
+            description="Are you sure to delete this user?"
+            okText="Yes"
+            cancelText="No"
+            onConfirm={() => deleteUser(record.email)}
+          >
+            <Button type="primary" danger>
+              Delete
+            </Button>
+          </Popconfirm>
+          <Button type="primary" onClick={()=> {
+            navigate(`../users/${record._id}`)
+
+            
+            
+          }} >
+              Update
+            </Button>
+
+        </Space>
       ),
     },
   ];
+
+
+ //------------------------------------------------------------------------------
   const fetchUsers = useCallback(async () => {
     setLoading(true);
     try {
@@ -77,13 +94,16 @@ const AdminUserPage = () => {
     }
   }, [apiUrl]);
 
+
+
+  //------------------------------------------------------------------------------
   const deleteUser = async (userEmail) => {
     try {
-      const response = await fetch(`${apiUrl}/api/users/${userEmail}`,{
+      const response = await fetch(`${apiUrl}/api/users/${userEmail}`, {
         method: "DELETE",
       });
       if (response.ok) {
-        message.success("Deletion Successed")
+        message.success("Deletion Successed");
         fetchUsers();
       } else {
         message.error("deletion failed");
@@ -95,7 +115,10 @@ const AdminUserPage = () => {
       setLoading(false);
     }
   };
+ //------------------------------------------------------------------------------
 
+
+ //------------------------------------------------------------------------------
   useEffect(() => {
     fetchUsers();
   }, [fetchUsers]);
@@ -110,4 +133,4 @@ const AdminUserPage = () => {
   );
 };
 
-export default AdminUserPage;
+export default UserPage;

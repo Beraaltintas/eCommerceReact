@@ -40,7 +40,7 @@ const Dialog = ({ isDialogShow, setIsDialogShow }) => {
 }
 
 export default Dialog
-Dialog.PropTypes = {
+Dialog.propTypes = {
     isDialogShow: PropTypes.bool,
     setIsDialogShow: PropTypes.func
 }

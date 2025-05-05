@@ -17,6 +17,6 @@ function SliderItem({imageSrc}) {
 };
 
 export default SliderItem
-SliderItem.PropTypes = {
-  imageSrc: PropTypes.String,
+SliderItem.propTypes = {
+  imageSrc: PropTypes.string,
 }

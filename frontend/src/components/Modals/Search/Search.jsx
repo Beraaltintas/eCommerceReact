@@ -56,7 +56,7 @@ const Search = ({ isSearchShow, setIsSearchShow }) => {
 };
 
 export default Search;
-Search.PropTypes = {
+Search.propTypes = {
     isSearchShow: PropTypes.bool,
     setIsSearchShow: PropTypes.func
 }
