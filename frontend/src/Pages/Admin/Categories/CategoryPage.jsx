@@ -2,7 +2,6 @@ import { Button, message, Popconfirm, Table, Space } from "antd";
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 const CategoryPage = () => {
   const [dataSource, setDataSource] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -11,36 +10,21 @@ const CategoryPage = () => {
 
   const columns = [
     {
-      title: "Avatar",
-      dataIndex: "avatar",
-      key: "avatar",
-      render: (imgSrc) => (
-        <img
-          src={imgSrc}
-          alt="Avatar"
-          style={{
-            width: "50px",
-            height: "50px",
-            borderRadius: "50%",
-          }}
-        />
-      ),
+      title: "Image",
+      dataIndex: "img",
+      key: "img",
+      render: (imgSrc) => <img src={imgSrc} alt="Image" width={100} />,
     },
     {
-      title: "Username",
-      dataIndex: "username",
-      key: "username",
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+      render: (text) => <b>{text}</b>,
     },
     {
-      title: "Email",
-      dataIndex: "email",
-      key: "email",
-    },
-
-    {
-      title: "Role",
-      dataIndex: "role",
-      key: "role",
+      title: "Created at",
+      dataIndex: "createdAt",
+      key: "createdAt",
     },
 
     {
@@ -48,38 +32,37 @@ const CategoryPage = () => {
       dataIndex: "actions",
       key: "actions",
       render: (_, record) => (
-        <Space>
+        <Space size={"middle"}>
+          <Button
+            type="primary"
+            onClick={() => {
+              navigate(`/admin/categories/update/${record._id}`);
+            }}
+          >
+            Update
+          </Button>
+
           <Popconfirm
-            title="Delete the user"
-            description="Are you sure to delete this user?"
+            title="Delete the category"
+            description="Are you sure to delete this category?"
             okText="Yes"
             cancelText="No"
-            onConfirm={() => deleteUser(record.email)}
+            onConfirm={() => deleteCategory(record._id)}
           >
             <Button type="primary" danger>
               Delete
             </Button>
           </Popconfirm>
-          <Button type="primary" onClick={()=> {
-            navigate(`../users/${record._id}`)
-
-            
-            
-          }} >
-              Update
-            </Button>
-
         </Space>
       ),
     },
   ];
 
-
- //------------------------------------------------------------------------------
-  const fetchUsers = useCallback(async () => {
+  //------------------------------------------------------------------------------
+  const fetchCategories = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${apiUrl}/api/users`);
+      const response = await fetch(`${apiUrl}/api/categories`);
       if (response.ok) {
         const data = await response.json();
         setDataSource(data);
@@ -94,17 +77,15 @@ const CategoryPage = () => {
     }
   }, [apiUrl]);
 
-
-
   //------------------------------------------------------------------------------
-  const deleteUser = async (userEmail) => {
+  const deleteCategory = async (categoryId) => {
     try {
-      const response = await fetch(`${apiUrl}/api/users/${userEmail}`, {
+      const response = await fetch(`${apiUrl}/api/categories/${categoryId}`, {
         method: "DELETE",
       });
       if (response.ok) {
         message.success("Deletion Successed");
-        fetchUsers();
+        fetchCategories();
       } else {
         message.error("deletion failed");
       }
@@ -115,13 +96,12 @@ const CategoryPage = () => {
       setLoading(false);
     }
   };
- //------------------------------------------------------------------------------
+  //------------------------------------------------------------------------------
 
-
- //------------------------------------------------------------------------------
+  //------------------------------------------------------------------------------
   useEffect(() => {
-    fetchUsers();
-  }, [fetchUsers]);
+    fetchCategories();
+  }, [fetchCategories]);
 
   return (
     <Table

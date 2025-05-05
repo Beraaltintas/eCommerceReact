@@ -10,8 +10,11 @@ import Auth from "./components/Auth/Auth";
 import BlogPage from "./Pages/BlogPage";
 import BlogDetailsPage from "./Pages/BlogDetailsPage";
 import ProductDetailsPage from "./Pages/ProductDetailsPage";
-import AdminUserPage from "./Pages/Admin/UserPage";
-import AdminUserSinglePage from "./Pages/Admin/UserSinglePage";
+import UserPage from "./Pages/Admin/UserPage";
+import UserSinglePage from "./Pages/Admin/UserSinglePage";
+import CategoryPage from "./Pages/Admin/Categories/CategoryPage";
+import UpdateCategoryPage from "./Pages/Admin/Categories/UpdateCategoryPage";
+import CreateCategoryPage from "./Pages/Admin/Categories/CreateCategoryPage";
 
 
 function App() {
@@ -26,8 +29,11 @@ function App() {
       <Route path="/product/:id" element={<ProductDetailsPage/>}/>
       <Route path="/blog/:id" element={<BlogDetailsPage/>}/>
       <Route path = "/admin/*">
-      <Route path="users" element={<AdminUserPage/>}/>
-      <Route path="users/:_id" element={<AdminUserSinglePage/>}/>
+      <Route path="users" element={<UserPage/>}/>
+      <Route path="users/:_id" element={<UserSinglePage/>}/>
+      <Route path="categories" element={<CategoryPage/>}/>
+      <Route path="categories/update/:id" element={<UpdateCategoryPage/>}/>
+      <Route path="categories/create" element={< CreateCategoryPage/>}/>
       
       </Route>
       
