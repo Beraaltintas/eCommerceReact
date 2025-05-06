@@ -18,6 +18,9 @@ import CreateCategoryPage from "./Pages/Admin/Categories/CreateCategoryPage";
 import CreateProductPage from "./Pages/Admin/Products/CreateProductPage";
 import ProductPage from "./Pages/Admin/Products/ProductPage";
 import UpdateProductPage from "./Pages/Admin/Products/UpdateProductPage";
+import CouponPage from "./Pages/Admin/Coupons/CouponPage";
+import CreateCouponPage from "./Pages/Admin/Coupons/CreateCouponPage";
+import UpdateCouponPage from "./Pages/Admin/Coupons/UpdateCouponPage";
 
 
 function App() {
@@ -40,6 +43,9 @@ function App() {
       <Route path="products" element={<ProductPage/>}/>
       <Route path="products/create" element={< CreateProductPage/>}/>
       <Route path="products/update/:id" element={<UpdateProductPage/>}/>
+      <Route path="coupons" element={<CouponPage/>}/>
+      <Route path="coupons/create" element={< CreateCouponPage/>}/>
+      <Route path="coupons/update/:id" element={<UpdateCouponPage/>}/>
       
       </Route>
       
