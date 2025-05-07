@@ -1,23 +1,59 @@
+import { message } from "antd";
+import PropTypes from "prop-types";
 import React, { useState } from "react";
 
-const ReviewForm = () => {
+const ReviewForm = ({ singleProduct, setSingleProduct }) => {
   const [rating, setRating] = useState(0);
   const handleRating = (e, newRating) => {
     e.preventDefault();
     setRating(newRating);
   };
 
-  const [review, setReview] = useState("0");
-  
-  const handleSubmit = (e) => {
+  const [review, setReview] = useState("");
+  const user = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : null;
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = {
-      rating: rating,
-      review: review,
+      reviews: [
+        ...singleProduct.reviews,
+        {
+          text: review,
+          rating: parseInt(rating),
+          user: user.id || user._id,
+        },
+      ],
     };
-    console.log(formData);
     
+    
+    try {
+      const res = await fetch(`${apiUrl}/api/products/${singleProduct._id}`,{
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if(!res.ok){
+        message.error("Something Went Wrong");
+        return;
+      }
+      const data = await res.json();
+      setSingleProduct(data);
+        
+        setReview("");
+        setRating(0);
+        message.success("Comment is added successfully")
+    // eslint-disable-next-line no-unused-vars
+    } catch (error) {
+      message.error("Something Went Wrong")
+    }
+
+
   };
+  console.log(singleProduct);
   return (
     <form className="comment-form" onSubmit={handleSubmit}>
       <p className="comment-notes">
@@ -96,6 +132,7 @@ const ReviewForm = () => {
           rows="10"
           cols="50"
           onChange={(e) => setReview(e.target.value)}
+          value={review}
         ></textarea>
       </div>
 
@@ -114,3 +151,8 @@ const ReviewForm = () => {
 };
 
 export default ReviewForm;
+ReviewForm.propTypes = {
+  active: PropTypes.string,
+  singleProduct: PropTypes.object,
+  setSingleProduct: PropTypes.func,
+};

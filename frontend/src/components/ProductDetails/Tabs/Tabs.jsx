@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Tabs.css";
 import Reviews from "../../Reviews/reviews";
 import PropTypes from "prop-types";
-const Tabs = ({singleProduct}) => {
+const Tabs = ({singleProduct, setSingleProduct}) => {
   const [activeTab, setActiveTab] = useState("desc");
   const handleTabClick =(e, tab) =>{
     e.preventDefault();
@@ -63,7 +63,7 @@ const Tabs = ({singleProduct}) => {
             </tbody>
           </table>
         </div>
-        <Reviews singleProduct={singleProduct} active={activeTab === 'reviews'? 'content active':'content'} />
+        <Reviews singleProduct={singleProduct} setSingleProduct={setSingleProduct} active={activeTab === 'reviews'? 'content active':'content'} />
       </div>
     </div>
   );
@@ -72,4 +72,5 @@ const Tabs = ({singleProduct}) => {
 export default Tabs;
 Tabs.propTypes = {
   singleProduct: PropTypes.object,
+  setSingleProduct: PropTypes.func,
 };

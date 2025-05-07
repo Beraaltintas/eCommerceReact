@@ -1,41 +1,38 @@
+import PropTypes from "prop-types";
 import React from "react";
 
-const ReviewItem = () => {
+const ReviewItem = ({ reviewItem }) => {
+  console.log(reviewItem);
+
+  const { review, user } = reviewItem;
+  const { text, createdAt, rating } = review;
+  const options = { year: "numeric", month: "short", day: "numeric" };
+  const formattedDate = new Date(createdAt).toLocaleDateString(
+    "tr-TR",
+    options
+  );
   return (
     <li className="comment-item">
       <div className="comment-avatar">
-        <img src="/img/avatars/avatar1.jpg" alt="" />
+        <img src={user.avatar} alt="" width={60} />
       </div>
       <div className="comment-text">
         <ul className="comment-star">
-          <li>
-            <i className="bi bi-star-fill"></i>
-          </li>
-          <li>
-            <i className="bi bi-star-fill"></i>
-          </li>
-          <li>
-            <i className="bi bi-star-fill"></i>
-          </li>
-          <li>
-            <i className="bi bi-star-fill"></i>
-          </li>
-          <li>
-            <i className="bi bi-star-half"></i>
-          </li>
+          {Array.from({ length: rating }, (_, index) => {
+            return (
+              <li key={index}>
+                <i className="bi bi-star-fill"></i>
+              </li>
+            );
+          })}
         </ul>
         <div className="comment-meta">
-          <strong>admin</strong>
-          <span>-</span>
-          <time>feb 23, 2025</time>
+          <strong>{user.username}</strong>
+          <span> - </span>
+          <time>{formattedDate}</time>
         </div>
         <div className="comment-desc">
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit
-            voluptatum cupiditate saepe sint reprehenderit magni tempora
-            maiores, quas optio quasi itaque qui, incidunt illum quibusdam!
-            Illum saepe iusto impedit eius.
-          </p>
+          <p>{text}</p>
         </div>
       </div>
     </li>
@@ -43,3 +40,8 @@ const ReviewItem = () => {
 };
 
 export default ReviewItem;
+ReviewItem.propTypes = {
+  active: PropTypes.string,
+  singleProduct: PropTypes.object,
+  setSingleProduct: PropTypes.func,
+};
