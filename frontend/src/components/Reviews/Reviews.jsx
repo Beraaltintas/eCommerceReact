@@ -2,18 +2,21 @@ import React from "react";
 import "./Reviews.css";
 import ReviewForm from "./ReviewForm";
 import ReviewItem from "./ReviewItem";
-import PropsType from "prop-types";
-const Reviews = ({active}) => {
+import PropTypes from "prop-types";
+const Reviews = ({active, singleProduct}) => {
   return (
     <div className={`tab-panel-reviews ${active}`}>
-      <h3>2 reviews for Basic Colored Sweatpants With Elastic Hems</h3>
-      <div className="comments">
-        <ol className="comment-list">
-          <ReviewItem />
-          <ReviewItem />
-          <ReviewItem />
-        </ol>
-      </div>
+      {singleProduct.rewievs.length > 0 ? (
+        <><h3>2 reviews for Basic Colored Sweatpants With Elastic Hems</h3><div className="comments">
+          <ol className="comment-list">
+            {singleProduct.rewievs.map((item, index) => (
+              <ReviewItem key={index} item={item} />
+            ))}
+
+          </ol>
+        </div></>) : <h3>No Comment</h3>}
+      
+
 
       <div className="review-form-wrapper">
         <h2>Add a Review</h2>
@@ -25,6 +28,7 @@ const Reviews = ({active}) => {
 
 export default Reviews;
 
-Reviews.propsTypes = {
-  active: PropsType.sring
+Reviews.propTypes = {
+  active: PropTypes.string,
+  singleProduct: PropTypes.object,
 }

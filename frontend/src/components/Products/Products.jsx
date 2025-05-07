@@ -1,11 +1,11 @@
 import "./Products.css";
 import ProductItem from "./ProductItem";
-import productsData from "../../data.json";
 import "./Products.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import React from "react";
 import Slider from "react-slick";
 import PropTypes from "prop-types";
+import { message } from "antd";
 
 function NextBtn({ onClick }) {
   return (
@@ -30,7 +30,27 @@ PrevBtn.propTypes = {
 };
 
 const Products = () => {
-  const [products] = useState(productsData);
+  const [products, setProducts] = useState([]);
+
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch(`${apiUrl}/api/products`);
+        if (response.ok) {
+          const data = await response.json();
+          setProducts(data);
+        } else {
+          message.error("Data fetch Failed");
+        }
+        console.log(response);
+      } catch (error) {
+        console.log("Data error:", error);
+      }
+    };
+    fetchProducts();
+  }, [apiUrl]);
   
   const sliderSettings = {
     dots: false,
@@ -69,7 +89,7 @@ const Products = () => {
           
             <Slider {...sliderSettings}>
               {products.map((product) => (
-                <ProductItem productItem={product} key={product.id} />
+                <ProductItem productItem={product} key={product._id} />
               ))}
             </Slider>
           

@@ -1,8 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 
 const ReviewForm = () => {
+  const [rating, setRating] = useState(0);
+  const handleRating = (e, newRating) => {
+    e.preventDefault();
+    setRating(newRating);
+  };
+
+  const [review, setReview] = useState("0");
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = {
+      rating: rating,
+      review: review,
+    };
+    console.log(formData);
+    
+  };
   return (
-    <form className="comment-form">
+    <form className="comment-form" onSubmit={handleSubmit}>
       <p className="comment-notes">
         Lorem ipsum dolor sit amet consectetur adipisicing elit.
         <span className="required">*</span>
@@ -13,25 +30,55 @@ const ReviewForm = () => {
           <span className="required">*</span>
         </label>
         <div className="stars">
-          <a href="#" className="star">
+          <a
+            href="#"
+            className={`star ${rating === 1 && "active"}`}
+            onClick={(e) => {
+              handleRating(e, 1);
+            }}
+          >
             <i className="bi bi-star-fill"></i>
           </a>
-          <a href="#" className="star">
+          <a
+            href="#"
+            className={`star ${rating === 2 && "active"}`}
+            onClick={(e) => {
+              handleRating(e, 2);
+            }}
+          >
             <i className="bi bi-star-fill"></i>
             <i className="bi bi-star-fill"></i>
           </a>
-          <a href="#" className="star">
+          <a
+            href="#"
+            className={`star ${rating === 3 && "active"}`}
+            onClick={(e) => {
+              handleRating(e, 3);
+            }}
+          >
             <i className="bi bi-star-fill"></i>
             <i className="bi bi-star-fill"></i>
             <i className="bi bi-star-fill"></i>
           </a>
-          <a href="#" className="star">
+          <a
+            href="#"
+            className={`star ${rating === 4 && "active"}`}
+            onClick={(e) => {
+              handleRating(e, 4);
+            }}
+          >
             <i className="bi bi-star-fill"></i>
             <i className="bi bi-star-fill"></i>
             <i className="bi bi-star-fill"></i>
             <i className="bi bi-star-fill"></i>
           </a>
-          <a href="#" className="star">
+          <a
+            href="#"
+            className={`star ${rating === 5 && "active"}`}
+            onClick={(e) => {
+              handleRating(e, 5);
+            }}
+          >
             <i className="bi bi-star-fill"></i>
             <i className="bi bi-star-fill"></i>
             <i className="bi bi-star-fill"></i>
@@ -44,20 +91,14 @@ const ReviewForm = () => {
         <label htmlFor="comment">
           Your review <span className="required ">*</span>
         </label>
-        <textarea id="comment" rows="10" cols="50"></textarea>
+        <textarea
+          id="comment"
+          rows="10"
+          cols="50"
+          onChange={(e) => setReview(e.target.value)}
+        ></textarea>
       </div>
-      <div className="comment-form-author form-comment">
-        <label htmlFor="name">
-          Name <span className="required ">*</span>
-        </label>
-        <input id="name" type="text" />
-      </div>
-      <div className="comment-form-email form-comment">
-        <label htmlFor="email">
-          Email<span className="required ">*</span>
-        </label>
-        <input id="email" type="email" />
-      </div>
+
       <div className="comment-form-cookies">
         <input id="cookies" type="checkbox" />
         <label htmlFor="cookies">
