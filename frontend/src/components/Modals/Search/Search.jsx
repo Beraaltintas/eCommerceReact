@@ -1,9 +1,26 @@
 import React from "react";
-import PropTypes from  "prop-types";
+import PropTypes from "prop-types";
 import "./Search.css";
+import { message } from "antd";
 const Search = ({ isSearchShow, setIsSearchShow }) => {
-    
-    
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    const productName = e.target[0].value;
+    try {
+      const res = await fetch(`${apiUrl}/api/products/search/${productName}`);
+      if(!res.ok){
+        message.warning("Product Fetch Error");
+        return;
+      }
+      const data = await res.json();
+      console.log(data);
+      
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className={`modal-search ${isSearchShow ? "show" : ""}`}>
       <div className="modal-wrapper">
@@ -11,7 +28,7 @@ const Search = ({ isSearchShow, setIsSearchShow }) => {
         <p className="modal-text">
           Start typing to see products you are looking for.
         </p>
-        <form action="" className="search-form">
+        <form action="" className="search-form" onSubmit={handleSearch}>
           <input type="text" placeholder="Search a product" />
           <button>
             <i className="bi bi-search"></i>
@@ -34,6 +51,7 @@ const Search = ({ isSearchShow, setIsSearchShow }) => {
                 <span className="search-price">$108.00</span>
               </div>
             </a>
+
             <a href="#" className="result-item">
               <img
                 src="/img/products/product2/1.png"
@@ -48,15 +66,22 @@ const Search = ({ isSearchShow, setIsSearchShow }) => {
             </a>
           </div>
         </div>
-        <i className="bi bi-x-lg" id="close-search" onClick={()=>setIsSearchShow(false)}></i>
+        <i
+          className="bi bi-x-lg"
+          id="close-search"
+          onClick={() => setIsSearchShow(false)}
+        ></i>
       </div>
-      <div className="modal-overlay" onClick={()=> setIsSearchShow(false)}></div>
+      <div
+        className="modal-overlay"
+        onClick={() => setIsSearchShow(false)}
+      ></div>
     </div>
   );
 };
 
 export default Search;
 Search.propTypes = {
-    isSearchShow: PropTypes.bool,
-    setIsSearchShow: PropTypes.func
-}
+  isSearchShow: PropTypes.bool,
+  setIsSearchShow: PropTypes.func,
+};
