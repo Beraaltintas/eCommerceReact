@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Cart.css"
 import CartProgress from "./CartProgress";
 import CartTAble from "./CartTable";
 import CartCoupon from "./CartCoupon";
 import CartTotals from "./CartTotals";
+import { CartContext } from "../../context/CartProvider";
 
 
 
 const Cart = () => {
+    const { cartItems} = useContext(CartContext);
   return (
     <section className="cart-page">
       <div className="container">
-        <div className="cart-page-wrapper">
+        {cartItems.length > 0 ?         <div className="cart-page-wrapper">
           <form className="cart-form">
             <CartProgress/>
             <div className="shop-table-wrapper">
@@ -22,7 +24,8 @@ const Cart = () => {
           <div className="cart-colleterals">
             <CartTotals/>
           </div>
-        </div>
+        </div> : <h2>No Products!</h2> }
+
       </div>
     </section>
   );
