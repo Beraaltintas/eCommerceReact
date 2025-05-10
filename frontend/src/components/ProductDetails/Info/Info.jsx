@@ -143,7 +143,7 @@ const Info = ({ singleProduct }) => {
         </div>
         <div className="product-tags">
           <strong>Tags:</strong>
-          <a href="#">black</a>,<a href="#">white</a>
+          <a href="#" >black</a>,<a href="#">white</a>
         </div>
       </div>
     </div>

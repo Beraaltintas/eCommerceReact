@@ -17,9 +17,9 @@ const ProductItem = ({ productItem }) => {
     originalPrice - (originalPrice * discountPercentage) / 100;
 
   return (
-    <div className="product-item glide__slide glide__slide--active">
+    <div className="product-item glide__slide glide__slide--active" >
       <div className="product-image">
-        <a href="#">
+        <a href="#" >
           <img src={productItem.img[0]} alt="" className="img1" />
           <img src={productItem.img[1]} alt="" className="img2" />
         </a>
