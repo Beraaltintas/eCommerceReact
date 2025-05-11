@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import { CartContext } from "../context/CartProvider";
 
 const Success = () => {
-    const {setCartItems} = useContext(CartContext);
+  const { setCartItems } = useContext(CartContext);
 
-    useEffect(() => {
-      setCartItems([]);
-    }, [setCartItems])
-    
+  useEffect(() => {
+    setCartItems([]);
+  }, [setCartItems]);
+
   return (
     <div className="success-page">
       <div className="container">
@@ -21,7 +21,9 @@ const Success = () => {
             <Link to={"/"} key="home">
               <Button type="primary">Home Page</Button>
             </Link>,
-            <Button key="buy">Orders</Button>,
+            <a href="/cart" key={"cart"}>
+              <Button key="buy">Cart</Button>
+            </a>,
           ]}
         />
       </div>

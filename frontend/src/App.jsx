@@ -22,35 +22,34 @@ import CouponPage from "./Pages/Admin/Coupons/CouponPage";
 import CreateCouponPage from "./Pages/Admin/Coupons/CreateCouponPage";
 import UpdateCouponPage from "./Pages/Admin/Coupons/UpdateCouponPage";
 import Success from "./Pages/Success";
-
+import OrderPage from "./Pages/Admin/OrderPage";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<HomePage/>} />
-      <Route path="/shop" element={<ShopPage/>}/>
-      <Route path="/blog" element={<BlogPage/>}/>
-      <Route path="/contact" element={<ContactPage/>}/>
-      <Route path="/cart" element={<CartPage/>}/>
-      <Route path="/auth" element={<AuthPage/>}/>
-      <Route path="/product/:id" element={<ProductDetailsPage/>}/>
-      <Route path="/blog/:id" element={<BlogDetailsPage/>}/>
-      <Route path="/success" element={<Success />}/>
-      <Route path = "/admin/*">
-      <Route path="users" element={<UserPage/>}/>
-      <Route path="users/:_id" element={<UserSinglePage/>}/>
-      <Route path="categories" element={<CategoryPage/>}/>
-      <Route path="categories/update/:id" element={<UpdateCategoryPage/>}/>
-      <Route path="categories/create" element={< CreateCategoryPage/>}/>
-      <Route path="products" element={<ProductPage/>}/>
-      <Route path="products/create" element={< CreateProductPage/>}/>
-      <Route path="products/update/:id" element={<UpdateProductPage/>}/>
-      <Route path="coupons" element={<CouponPage/>}/>
-      <Route path="coupons/create" element={< CreateCouponPage/>}/>
-      <Route path="coupons/update/:id" element={<UpdateCouponPage/>}/>
-      
+      <Route path="/" element={<HomePage />} />
+      <Route path="/shop" element={<ShopPage />} />
+      <Route path="/blog" element={<BlogPage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/cart" element={<CartPage />} />
+      <Route path="/auth" element={<AuthPage />} />
+      <Route path="/product/:id" element={<ProductDetailsPage />} />
+      <Route path="/blog/:id" element={<BlogDetailsPage />} />
+      <Route path="/success" element={<Success />} />
+      <Route path="/admin/*">
+        <Route path="users" element={<UserPage />} />
+        <Route path="users/:_id" element={<UserSinglePage />} />
+        <Route path="categories" element={<CategoryPage />} />
+        <Route path="categories/update/:id" element={<UpdateCategoryPage />} />
+        <Route path="categories/create" element={<CreateCategoryPage />} />
+        <Route path="products" element={<ProductPage />} />
+        <Route path="products/create" element={<CreateProductPage />} />
+        <Route path="products/update/:id" element={<UpdateProductPage />} />
+        <Route path="coupons" element={<CouponPage />} />
+        <Route path="coupons/create" element={<CreateCouponPage />} />
+        <Route path="coupons/update/:id" element={<UpdateCouponPage />} />
+        <Route path="orders" element={<OrderPage />} />
       </Route>
-      
     </Routes>
   );
 }
