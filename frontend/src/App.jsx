@@ -21,6 +21,7 @@ import UpdateProductPage from "./Pages/Admin/Products/UpdateProductPage";
 import CouponPage from "./Pages/Admin/Coupons/CouponPage";
 import CreateCouponPage from "./Pages/Admin/Coupons/CreateCouponPage";
 import UpdateCouponPage from "./Pages/Admin/Coupons/UpdateCouponPage";
+import Success from "./Pages/Success";
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
       <Route path="/auth" element={<AuthPage/>}/>
       <Route path="/product/:id" element={<ProductDetailsPage/>}/>
       <Route path="/blog/:id" element={<BlogDetailsPage/>}/>
+      <Route path="/success" element={<Success />}/>
       <Route path = "/admin/*">
       <Route path="users" element={<UserPage/>}/>
       <Route path="users/:_id" element={<UserSinglePage/>}/>
