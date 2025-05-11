@@ -16,6 +16,7 @@ const OrderPage = () => {
       title: "Order Price",
       dataIndex: "amount",
       key: "amount",
+      render: (record) => <b>${(record / 100).toFixed(2)}</b>
     },
   ];
 
