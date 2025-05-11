@@ -17,6 +17,14 @@ const ReviewForm = ({ singleProduct, setSingleProduct }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(!user){
+      message.error("You must be logged in to post a review");
+      return;
+    }
+    if(rating === 0){
+      message.warning("Please select rating");
+      return;
+    }
     const formData = {
       reviews: [
         ...singleProduct.reviews,
@@ -53,7 +61,6 @@ const ReviewForm = ({ singleProduct, setSingleProduct }) => {
 
 
   };
-  console.log(singleProduct);
   return (
     <form className="comment-form" onSubmit={handleSubmit}>
       <p className="comment-notes">
@@ -133,6 +140,7 @@ const ReviewForm = ({ singleProduct, setSingleProduct }) => {
           cols="50"
           onChange={(e) => setReview(e.target.value)}
           value={review}
+          required
         ></textarea>
       </div>
 

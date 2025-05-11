@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Gallery.css";
 import Slider from "react-slick";
 import PropTypes from "prop-types";
@@ -38,11 +38,18 @@ function PrevBtn({ onClick }) {
 PrevBtn.prototype = {
   onClick: PropTypes.func,
 };
-const Gallery = ({singleProduct}) => {
+const Gallery = ({ singleProduct }) => {
   const [activeImg, setActiveImg] = useState({
-    img: singleProduct.img[0],
-    imgIndex:0
+    img: "",
+    imgIndex: 0,
   });
+  useEffect(() => {
+    setActiveImg({
+      img: singleProduct.img[0],
+      imgIndex: 0,
+    });
+  }, [singleProduct.img]);
+
   const sliderSettings = {
     dots: false,
     infinite: true,
@@ -65,10 +72,12 @@ const Gallery = ({singleProduct}) => {
                 <li
                   className="glide__slide glide__slide--active"
                   key={index}
-                  onClick={() => setActiveImg({
-                    img:itemImg,
-                    imgIndex:index
-                  })}
+                  onClick={() =>
+                    setActiveImg({
+                      img: itemImg,
+                      imgIndex: index,
+                    })
+                  }
                 >
                   <img
                     src={`${itemImg}`}
@@ -91,4 +100,4 @@ const Gallery = ({singleProduct}) => {
 export default Gallery;
 Gallery.propTypes = {
   singleProduct: PropTypes.object,
-}
+};
