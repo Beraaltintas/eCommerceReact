@@ -1,30 +1,43 @@
-import { Button, message, Popconfirm, Table, Space } from "antd";
 import React, { useCallback, useEffect, useState } from "react";
+import { Button, message, Popconfirm, Space, Spin, Table } from "antd";
 import { useNavigate } from "react-router-dom";
 
-const CategoryPage = () => {
+const InformationsPage = () => {
   const [dataSource, setDataSource] = useState([]);
   const [loading, setLoading] = useState(false);
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const navigate = useNavigate();
-
   const columns = [
-    {
-      title: "Image",
-      dataIndex: "img",
-      key: "img",
-      render: (imgSrc) => <img src={imgSrc} alt="Image" width={100} />,
-    },
     {
       title: "Name",
       dataIndex: "name",
       key: "name",
-      render: (text) => <b>{text}</b>,
+      render: (code) => <b>{code}</b>,
     },
     {
-      title: "Created at",
-      dataIndex: "createdAt",
-      key: "createdAt",
+      title: "Addresss",
+      dataIndex: "address",
+      key: "address",
+    },
+    {
+      title: "Phone",
+      dataIndex: "phone",
+      key: "phone",
+    },
+    {
+      title: "Logo",
+      dataIndex: "logo",
+      key: "logo",
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: "Open Hours",
+      dataIndex: "open_hours",
+      key: "open_hours",
     },
 
     {
@@ -36,18 +49,18 @@ const CategoryPage = () => {
           <Button
             type="primary"
             onClick={() => {
-              navigate(`/admin/categories/update/${record._id}`);
+              navigate(`/admin/informations/update/${record._id}`);
             }}
           >
             Update
           </Button>
 
           <Popconfirm
-            title="Delete the category"
-            description="Are you sure to delete this category?"
+            title="Delete the coupon"
+            description="Are you sure to delete this info?"
             okText="Yes"
             cancelText="No"
-            onConfirm={() => deleteCategory(record._id)}
+            onConfirm={() => deleteCoupon(record._id)}
           >
             <Button type="primary" danger>
               Delete
@@ -57,59 +70,52 @@ const CategoryPage = () => {
       ),
     },
   ];
-
   //------------------------------------------------------------------------------
-  const fetchCategories = useCallback(async () => {
+  const fetchInfo = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await fetch(`${apiUrl}/api/categories`);
+      const response = await fetch(`${apiUrl}/api/information`);
       if (response.ok) {
         const data = await response.json();
-        setDataSource(data);
+        setDataSource(data.map((item) => ({ ...item, key: item._id })));
       } else {
-        message.error("Data fetch Failed");
+        message.error("Data Fetch Failed");
       }
-      console.log(response);
     } catch (error) {
-      console.log("Data error:", error);
+      console.log(error);
     } finally {
       setLoading(false);
     }
   }, [apiUrl]);
-
   //------------------------------------------------------------------------------
-  const deleteCategory = async (categoryId) => {
+  const deleteCoupon = async (infoId) => {
     try {
-      const response = await fetch(`${apiUrl}/api/categories/${categoryId}`, {
+      const response = await fetch(`${apiUrl}/api/information/${infoId}`, {
         method: "DELETE",
       });
       if (response.ok) {
         message.success("Deletion Successed");
-        fetchCategories();
+        fetchInfo();
       } else {
-        message.error("deletion failed");
+        message.error("Deletion Failed");
       }
+      console.log(response);
     } catch (error) {
-      console.log("delete errorı:", error);
+      console.log(error);
     } finally {
       setLoading(false);
     }
   };
   //------------------------------------------------------------------------------
-
-  //------------------------------------------------------------------------------
   useEffect(() => {
-    fetchCategories();
-  }, [fetchCategories]);
+    fetchInfo();
+  }, [fetchInfo]);
 
   return (
-    <Table
-      dataSource={dataSource}
-      columns={columns}
-      rowKey={(record) => record._id}
-      loading={loading}
-    />
+    <Spin spinning={loading}>
+      <Table columns={columns} dataSource={dataSource} />
+    </Spin>
   );
 };
 
-export default CategoryPage;
+export default InformationsPage;

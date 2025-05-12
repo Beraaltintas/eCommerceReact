@@ -24,6 +24,8 @@ import UpdateCouponPage from "./Pages/Admin/Coupons/UpdateCouponPage";
 import Success from "./Pages/Success";
 import OrderPage from "./Pages/Admin/OrderPage";
 import DashboardPage from "./Pages/Admin/DashboardPage";
+import InformationsPage from "./Pages/Admin/Informations/InformationsPage";
+import UpdateInformationPage from "./Pages/Admin/Informations/UpdateInformationPage";
 
 
 
@@ -53,6 +55,8 @@ function App() {
         <Route path="coupons/create" element={<CreateCouponPage />} />
         <Route path="coupons/update/:id" element={<UpdateCouponPage />} />
         <Route path="orders" element={<OrderPage />} />
+        <Route path="informations" element={<InformationsPage />} />
+        <Route path="informations/update/:id" element={<UpdateInformationPage />} />
       </Route>
     </Routes>
   );

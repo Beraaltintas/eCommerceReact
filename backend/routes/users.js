@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     res.status(200).json(users);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "server error" });
+    res.status(500).json({ error: "Server Error" });
   }
 });
 
@@ -24,7 +24,7 @@ router.delete("/:email", async (req, res) => {
     res.status(200).json(deletedUser);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "server error" });
+    res.status(500).json({ error: "Server Error" });
   }
 });
 
@@ -49,7 +49,7 @@ router.delete("/:email", async (req, res) => {
       res.status(200).json(updatedUser);
     } catch (error) {
       console.log(error);
-      res.status(500).json({ error: "server error" });
+      res.status(500).json({ error: "Server Error" });
     }
   });
   // Tek bir kullanıcıyı ID ile getirme
@@ -63,7 +63,7 @@ router.get("/:userId", async (req, res) => {
     res.status(200).json(user);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "server error" });
+    res.status(500).json({ error: "Server Error" });
   }
 });
 

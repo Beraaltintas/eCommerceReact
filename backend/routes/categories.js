@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
     res.status(201).json(newCategory);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "server error" });
+    res.status(500).json({ error: "Server Error" });
   }
 });
 
@@ -22,7 +22,7 @@ router.get("/", async (req, res) => {
     res.status(200).json(categories);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "server error" });
+    res.status(500).json({ error: "Server Error" });
   }
 });
 
@@ -41,7 +41,7 @@ router.get("/:categoryId", async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "server error" });
+    res.status(500).json({ error: "Server Error" });
   }
 });
 //category update
@@ -64,7 +64,7 @@ router.put("/:categoryId", async (req, res) => {
     res.status(200).json(updatedCategory);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "server error" });
+    res.status(500).json({ error: "Server Error" });
   }
 });
 
@@ -79,7 +79,10 @@ router.delete("/:categoryId", async (req, res) => {
     res.status(200).json(deletedCategory);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "server error" });
+    res.status(500).json({ error: "Server Error" });
   }
 });
+
+
+
 module.exports = router;

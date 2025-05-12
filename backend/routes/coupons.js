@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
     res.status(201).json(newCoupon);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "server error" });
+    res.status(500).json({ error: "Server Error" });
   }
 });
 
@@ -28,7 +28,7 @@ router.get("/", async (req, res) => {
     res.status(200).json(coupons);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "server error" });
+    res.status(500).json({ error: "Server Error" });
   }
 });
 
@@ -43,7 +43,7 @@ router.get("/:couponId", async (req, res) => {
     res.status(200).json(coupon);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "server error" });
+    res.status(500).json({ error: "Server Error" });
   }
 });
 //belirli bir kupon getirme name e göre ye göre(read-single)
@@ -59,7 +59,7 @@ router.get("/code/:couponCode", async (req, res) => {
     res.status(200).json({discountPercent: discountPercent});
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "server error" });
+    res.status(500).json({ error: "Server Error" });
   }
 });
 
@@ -83,7 +83,7 @@ router.put("/:couponId", async (req, res) => {
     res.status(200).json(updatedCoupon);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "server error" });
+    res.status(500).json({ error: "Server Error" });
   }
 });
 
@@ -98,7 +98,7 @@ router.delete("/:couponId", async (req, res) => {
       res.status(200).json(deletedCoupon);
     } catch (error) {
       console.log(error);
-      res.status(500).json({ error: "server error" });
+      res.status(500).json({ error: "Server Error" });
     }
   });
 

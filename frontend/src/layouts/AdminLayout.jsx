@@ -9,6 +9,7 @@ import {
   DashboardOutlined,
   ShoppingCartOutlined,
   AppstoreOutlined,
+  InfoCircleOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 const { Sider, Header, Content } = Layout;
@@ -123,6 +124,30 @@ const AdminLayout = ({ children }) => {
     },
     {
       key: "13",
+      icon: <InfoCircleOutlined />,
+      label: "Info",
+      path: "/admin/informations",
+      children:[
+        {
+          key: "14",
+          label: "İnfo List",
+          path: "/admin/informations",
+          onClick: () => {
+            navigate(`/admin/informations`);
+          },
+        },
+        {
+          key: "15",
+          label: "Create Info",
+          path: "/admin/informations/create",
+          onClick: () => {
+            navigate("/admin/informations/create");
+          },
+        },
+      ]
+    },
+    {
+      key: "16",
       icon: <RollbackOutlined />,
       label: "Ana Sayfaya Git",
       onClick: () => {
