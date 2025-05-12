@@ -1,6 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Contact.css";
+import { message } from "antd";
 const Contact = () => {
+  const [info, setInfo] = useState([]);
+  const apiUrl = import.meta.env.VITE_API_BASE_URL;
+
+  useEffect(() => {
+    const fetchInfo = async () => {
+      try {
+        const response = await fetch(`${apiUrl}/api/information`);
+
+        if (response.ok) {
+          const data = await response.json();
+          setInfo(data);
+          console.log(data);
+        } else {
+          message.error("Data Fetch Failed");
+        }
+      } catch (error) {
+        console.log("Data error", error);
+      }
+    };
+    fetchInfo();
+  }, [apiUrl]);
+
   return (
     <section className="contact">
       <div className="container">
@@ -70,21 +93,20 @@ const Contact = () => {
             <div className="contact-info">
               <div className="contact-info-item">
                 <div className="contact-info-texts">
-                  <strong>Clotya Store</strong>
-                  <p className="contact-street">
-                    Clotya Store Germany — 785 15h Street, Office 478/B Green
-                    Mall Berlin, De 81566
-                  </p>
-                  <a href="tel:Phone: +1 1234 567 88">Phone: +1 1234 567 88</a>
-                  <a href="mailto:Email: contact@example.com">
-                    Email: contact@example.com
+                  <strong>{info[0]?.name}</strong>
+                  <p className="contact-street">{info[0]?.address}</p>
+                  <a href={`tel:${info[0]?.phone}`}>
+                    Phone: {info[0]?.phone}
+                  </a>
+                  <a href={`mailto:Email: ${info[0]?.email}`}>
+                    {info[0]?.email}
                   </a>
                 </div>
               </div>
               <div className="contact-info-item">
                 <div className="contact-info-texts">
                   <strong>Opening Hours</strong>
-                  <p className="contact-date">Monday - Friday : 9am - 5pm</p>
+                  <p className="contact-date">{info[0]?.open_hours}</p>
                   <p>Weekend Closed</p>
                 </div>
               </div>

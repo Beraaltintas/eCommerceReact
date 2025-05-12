@@ -3,10 +3,12 @@ import "./Header.css";
 import PropTypes from "prop-types";
 import { CartContext } from "../../../context/CartProvider";
 import { Link, useLocation } from "react-router-dom";
+import { useInfo } from "../../../context/InfoContext";
 const Header = ({ setIsSearchShow }) => {
   const { cartItems } = useContext(CartContext);
   const { pathname } = useLocation(); //{pathname} özelliğini alır sadece
   const user = localStorage.getItem("user");
+  const info = useInfo();
 
   return (
     <header>
@@ -28,7 +30,9 @@ const Header = ({ setIsSearchShow }) => {
             </div>
             <div className="header-left">
               <Link to={"/"} className="logo">
-                LOGO
+                {info[0]?.logo && (
+                  <img src={info[0].logo} alt="Logo" width={150} />
+                )}
               </Link>
             </div>
 
